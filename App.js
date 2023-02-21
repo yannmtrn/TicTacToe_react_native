@@ -4,9 +4,9 @@ import { TabBar } from './src/navigation/TabBar';
 export default function App() {
 
   return (
-        <NavigationContainer>
+      <NavigationContainer>
           <TabBar/>
-        </NavigationContainer>
+      </NavigationContainer>
   );
 
 }

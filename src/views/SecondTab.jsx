@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Pressable, Text, View, StyleSheet} from 'react-native';
+import { Pressable, Text, View, StyleSheet } from 'react-native';
 
 export function SecondTab() {
 
