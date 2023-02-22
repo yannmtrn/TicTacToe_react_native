@@ -3,24 +3,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { HomePage } from "../views/HomePage";
 import { SecondTab } from "../views/SecondTab";
+import { useColorJoueurXValue, useColorJoueur0Value, useColorBackgroundValue, useColorBackgroundTxtValue } from "../provider/GameProvider";
 
 const Tab = createBottomTabNavigator();
 
 export function TabBar() {
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+        screenOptions={{
+            tabBarStyle: {
+                backgroundColor: useColorBackgroundValue(),
+                opacity: 0.9,
+            },
+            tabBarActiveTintColor: useColorJoueurXValue(),
+            tabBarInactiveTintColor: useColorJoueur0Value(),
+            headerStyle: {
+                backgroundColor: useColorBackgroundValue(),
+                opacity: 0.9,
+            },
+            headerTintColor: useColorBackgroundTxtValue(),
+        }}>
       <Tab.Screen
           name="Game"
           component={HomePage}
             options={{
-                headerStyle: {
-                    backgroundColor: '#121212',
-                    opacity: 0.9,
-                },
-                headerTintColor: '#fff',
                 tabBarIcon: () => (
-                    <FontAwesomeIcon icon={faGamepad} color={"black"} size={30} />
+                    <FontAwesomeIcon icon={faGamepad} color={useColorBackgroundTxtValue()} size={30} />
                 ),
             }}
       />
@@ -28,13 +37,8 @@ export function TabBar() {
           name="Settings"
           component={SecondTab}
             options={{
-                headerStyle: {
-                    backgroundColor: '#121212',
-                    opacity: 0.9,
-                },
-                headerTintColor: '#fff',
                 tabBarIcon: () => (
-                    <FontAwesomeIcon icon={faGear} color={"black"} size={25} />
+                    <FontAwesomeIcon icon={faGear} color={useColorBackgroundTxtValue()} size={25} />
                 ),
             }}
       />

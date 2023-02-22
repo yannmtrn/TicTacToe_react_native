@@ -1,9 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
+import { useColorJoueurXValue, useColorJoueur0Value } from "../provider/GameProvider";
 
 export function PlayerInfo({ activePlayer }) {
 
+    const activeColorX = useColorJoueurXValue();
+    const activeColor0 = useColorJoueur0Value();
+
     return (
-        <View style={[styles.playerInfo, { backgroundColor : activePlayer === "X"?"#87e7e1":"#e8b5db"} ]}>
+        <View style={[styles.playerInfo, { backgroundColor : activePlayer === "X"?activeColorX:activeColor0} ]}>
             <Text style={styles.playerText}>Player: {activePlayer}'s turn </Text>
         </View>
     );

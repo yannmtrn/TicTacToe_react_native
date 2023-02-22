@@ -4,8 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faXmark, faCircle } from "@fortawesome/free-solid-svg-icons";
 import { PlayerInfo } from "./PlayerInfo";
 import { CleanButton } from "./CleanButton";
+import { useColorBackgroundTxtValue, useColorBackgroundValue } from "../provider/GameProvider";
 
 export function Board() {
+
+    const backgroundColor = useColorBackgroundValue();
+    const backgroundColorText = useColorBackgroundTxtValue();
 
     const [activePlayer, setActivePlayer] = useState('X');
     const [markers, setMarkers] = useState([null, null, null, null, null, null, null, null, null]);
@@ -62,49 +66,49 @@ export function Board() {
     , [markers]);
 
     return (
-        <SafeAreaView style={styles.body}>
+        <SafeAreaView style={[styles.body, { backgroundColor : backgroundColor}]}>
             <PlayerInfo activePlayer={activePlayer}/>
             <View style={styles.mainContainer}>
                 <View style={styles.row}>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(0)}>
-                        {markers[0] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[0] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(0)}>
+                        {markers[0] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[0] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(1)}>
-                        {markers[1] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[1] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(1)}>
+                        {markers[1] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[1] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(2)}>
-                        {markers[2] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[2] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
-                    </Pressable>
-                </View>
-                <View style={styles.row}>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(3)}>
-                        {markers[3] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[3] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
-                    </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(4)}>
-                        {markers[4] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[4] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
-                    </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(5)}>
-                        {markers[5] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[5] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(2)}>
+                        {markers[2] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[2] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
                 </View>
                 <View style={styles.row}>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(6)}>
-                        {markers[6] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[6] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(3)}>
+                        {markers[3] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[3] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(7)}>
-                        {markers[7] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[7] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(4)}>
+                        {markers[4] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[4] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
-                    <Pressable style={styles.cell} onPress={()=>markPosition(8)}>
-                        {markers[8] === "X" && <FontAwesomeIcon icon={faXmark} style={styles.icon} size={90}/>}
-                        {markers[8] === "0" && <FontAwesomeIcon icon={faCircle} style={styles.icon} size={70}/>}
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(5)}>
+                        {markers[5] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[5] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
+                    </Pressable>
+                </View>
+                <View style={styles.row}>
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(6)}>
+                        {markers[6] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[6] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
+                    </Pressable>
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(7)}>
+                        {markers[7] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[7] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
+                    </Pressable>
+                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(8)}>
+                        {markers[8] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
+                        {markers[8] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
                     </Pressable>
                 </View>
             </View>
@@ -116,7 +120,6 @@ export function Board() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: '#121212',
         opacity: 0.9,
     },
     mainContainer: {
@@ -138,10 +141,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
-        borderColor: 'white',
         opacity: 0.8,
-    },
-    icon: {
-        color: 'white',
     },
 });

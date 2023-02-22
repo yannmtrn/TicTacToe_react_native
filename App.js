@@ -1,12 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { TabBar } from './src/navigation/TabBar';
+import { GameProvider } from "./src/provider/GameProvider";
 
 export default function App() {
 
   return (
-      <NavigationContainer>
-          <TabBar/>
-      </NavigationContainer>
+      <GameProvider>
+          <NavigationContainer>
+              <TabBar/>
+          </NavigationContainer>
+      </GameProvider>
   );
 
 }
