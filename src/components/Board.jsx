@@ -6,10 +6,28 @@ import { PlayerInfo } from "./PlayerInfo";
 import { CleanButton } from "./CleanButton";
 import { useColorBackgroundTxtValue, useColorBackgroundValue } from "../provider/GameProvider";
 
-export function Board() {
-
-    const backgroundColor = useColorBackgroundValue();
+function Marker({value}) {
     const backgroundColorText = useColorBackgroundTxtValue();
+    if (!value) {
+        return null
+    }
+    return value === "X" ? 
+        <FontAwesomeIcon icon={faXmark} color={backgroundColorText} size={90}/> 
+        : <FontAwesomeIcon icon={faCircle} color={backgroundColorText} size={70}/>
+} 
+
+function BoardButton({onPress, value}) {
+    const backgroundColorText = useColorBackgroundTxtValue();
+
+    return (
+        <Pressable style={[styles.cell, {borderColor: backgroundColorText}]} onPress={onPress}>
+            <Marker value={value} />
+        </Pressable>
+    )
+}
+
+export function Board() {
+    const backgroundColor = useColorBackgroundValue();
 
     const [activePlayer, setActivePlayer] = useState('X');
     const [markers, setMarkers] = useState([null, null, null, null, null, null, null, null, null]);
@@ -62,54 +80,26 @@ export function Board() {
             alert("Winner is: " + winner);
             resetMarkers();
         }
-    }
-    , [markers]);
+    }, [markers]);
 
     return (
         <SafeAreaView style={[styles.body, { backgroundColor : backgroundColor}]}>
             <PlayerInfo activePlayer={activePlayer}/>
             <View style={styles.mainContainer}>
                 <View style={styles.row}>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(0)}>
-                        {markers[0] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[0] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(1)}>
-                        {markers[1] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[1] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(2)}>
-                        {markers[2] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[2] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
+                    <BoardButton onPress={()=>markPosition(0)} value={markers[0]}/>
+                    <BoardButton onPress={()=>markPosition(1)} value={markers[1]}/>
+                    <BoardButton onPress={()=>markPosition(2)} value={markers[2]}/>
                 </View>
                 <View style={styles.row}>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(3)}>
-                        {markers[3] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[3] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(4)}>
-                        {markers[4] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[4] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(5)}>
-                        {markers[5] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[5] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
+                    <BoardButton onPress={()=>markPosition(3)} value={markers[3]}/>
+                    <BoardButton onPress={()=>markPosition(4)} value={markers[4]}/>
+                    <BoardButton onPress={()=>markPosition(5)} value={markers[5]}/>
                 </View>
                 <View style={styles.row}>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(6)}>
-                        {markers[6] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[6] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(7)}>
-                        {markers[7] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[7] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
-                    <Pressable style={[styles.cell, {borderColor: useColorBackgroundTxtValue()}]} onPress={()=>markPosition(8)}>
-                        {markers[8] === "X" && <FontAwesomeIcon icon={faXmark} color={useColorBackgroundTxtValue()} size={90}/>}
-                        {markers[8] === "0" && <FontAwesomeIcon icon={faCircle} color={useColorBackgroundTxtValue()} size={70}/>}
-                    </Pressable>
+                    <BoardButton onPress={()=>markPosition(6)} value={markers[6]}/>
+                    <BoardButton onPress={()=>markPosition(7)} value={markers[7]}/>
+                    <BoardButton onPress={()=>markPosition(8)} value={markers[8]}/>
                 </View>
             </View>
             <CleanButton resetMarkers={resetMarkers}/>
