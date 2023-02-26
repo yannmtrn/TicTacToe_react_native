@@ -5,13 +5,12 @@ import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { useColorBackgroundTxtValue } from "../provider/GameProvider";
 
 export function CleanButton({ resetMarkers }) {
-
     const backgroundColorText = useColorBackgroundTxtValue();
 
     return (
         <View style={styles.viewCleanBtn}>
             <Pressable style={styles.cleanBtn} onPress={resetMarkers}>
-                <FontAwesomeIcon icon={faRepeat} color={useColorBackgroundTxtValue()} size={60}/>
+                <FontAwesomeIcon icon={faRepeat} color={backgroundColorText} size={60}/>
             </Pressable>
         </View>
     )
