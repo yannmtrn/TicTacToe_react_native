@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { Pressable, Text, View, StyleSheet, Image, Button } from 'react-native';
+import { View, StyleSheet, Image, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useColorJoueurXValue, useColorJoueurXSetter, useColorJoueur0Value, useColorJoueur0Setter, useColorBackgroundValue, useColorBackgroundSetter, useColorBackgroundTxtValue, useColorBackgroundTxtSetter } from "../provider/GameProvider";
+import { useColorJoueurXValue, useColorJoueurXSetter, useColorJoueur0Value, useColorJoueur0Setter, useColorBackgroundValue, useSetDarkTheme, useColorBackgroundTxtValue } from "../provider/GameProvider";
+import { ThemeButton } from '../components/ThemeButton';
 
 export function SecondTab() {
-
     const activeColorX = useColorJoueurXValue();
     const setActiveColorX = useColorJoueurXSetter();
 
     const activeColor0 = useColorJoueur0Value();
     const setActiveColor0 = useColorJoueur0Setter();
 
+    const setDarkTheme = useSetDarkTheme();
     const backgroundColor = useColorBackgroundValue();
-    const setBackgroundColor = useColorBackgroundSetter();
-
     const backgroundColorText = useColorBackgroundTxtValue();
-    const setBackgroundColorText = useColorBackgroundTxtSetter();
 
     const [image, setImage] = useState(null);
 
@@ -36,13 +34,7 @@ export function SecondTab() {
     }
 
     const changeBackgroundColor = () => {
-        if (backgroundColor === '#121212') {
-            setBackgroundColor('white');
-            setBackgroundColorText('#121212')
-        } else {
-            setBackgroundColor('#121212');
-            setBackgroundColorText('white')
-        }
+        setDarkTheme(currentThemeValue => !currentThemeValue)
     }
 
      const pickImage = async () => {
@@ -60,19 +52,19 @@ export function SecondTab() {
 
     return (
         <>
-        <View style={[styles.profilePictureGlobal, { backgroundColor: backgroundColor === "#121212"?"#121212":"white"}]}>
+        <View style={[styles.profilePictureGlobal, { backgroundColor }]}>
             <Image
-                style={[styles.profilePictureSlot, { borderColor: useColorBackgroundTxtValue()}]}
+                style={[styles.profilePictureSlot, { borderColor: backgroundColorText}]}
                 source= {{
                     uri: image,
                 }}
             />
             <Button title="Modifier" onPress={pickImage} />
         </View>
-        <View style={[styles.container, { backgroundColor: backgroundColor === "#121212"?"#121212":"white"}]}>
-            <Pressable style={[styles.buttonChange, { borderColor: backgroundColor === "#121212"?"white":"#121212"}]} onPress={changeColorX}><Text style={{color: activeColorX, fontSize: 16}}>Change color Joueur X</Text></Pressable>
-            <Pressable style={[styles.buttonChange, { borderColor: backgroundColor === "#121212"?"white":"#121212"}]} onPress={changeColor0}><Text style={{color: activeColor0, fontSize: 16}}>Change color Joueur 0</Text></Pressable>
-            <Pressable style={[styles.buttonChange, { borderColor: backgroundColor === "#121212"?"white":"#121212"}]} onPress={changeBackgroundColor}><Text style={{color: backgroundColorText, fontSize: 16}}>Change background color</Text></Pressable>
+        <View style={[styles.container, { backgroundColor: backgroundColor}]}>
+            <ThemeButton onPress={changeColorX} title="Change color Joueur X"  textColor={activeColorX} />
+            <ThemeButton onPress={changeColor0} title="Change color Joueur 0"  textColor={activeColor0} />
+            <ThemeButton onPress={changeBackgroundColor} title="Change background color" textColor={backgroundColorText}  />
         </View>
         </>
     );

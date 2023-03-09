@@ -9,27 +9,32 @@ const Tab = createBottomTabNavigator();
 
 export function TabBar() {
 
+    const backgroundColor = useColorBackgroundValue()
+    const colorJoueurX = useColorJoueurXValue()
+    const colorJoueur0 = useColorJoueur0Value()
+    const backgroundColorText = useColorBackgroundTxtValue()
+
   return (
     <Tab.Navigator
         screenOptions={{
             tabBarStyle: {
-                backgroundColor: useColorBackgroundValue(),
+                backgroundColor,
                 opacity: 0.9,
             },
-            tabBarActiveTintColor: useColorJoueurXValue(),
-            tabBarInactiveTintColor: useColorJoueur0Value(),
+            tabBarActiveTintColor: colorJoueurX,
+            tabBarInactiveTintColor: colorJoueur0,
             headerStyle: {
-                backgroundColor: useColorBackgroundValue(),
+                backgroundColor,
                 opacity: 0.9,
             },
-            headerTintColor: useColorBackgroundTxtValue(),
+            headerTintColor: backgroundColorText,
         }}>
       <Tab.Screen
           name="Game"
           component={HomePage}
             options={{
                 tabBarIcon: () => (
-                    <FontAwesomeIcon icon={faGamepad} color={useColorBackgroundTxtValue()} size={30} />
+                    <FontAwesomeIcon icon={faGamepad} color={backgroundColorText} size={30} />
                 ),
             }}
       />
@@ -38,7 +43,7 @@ export function TabBar() {
           component={SecondTab}
             options={{
                 tabBarIcon: () => (
-                    <FontAwesomeIcon icon={faGear} color={useColorBackgroundTxtValue()} size={25} />
+                    <FontAwesomeIcon icon={faGear} color={backgroundColorText} size={25} />
                 ),
             }}
       />
